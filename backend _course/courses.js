@@ -51,7 +51,7 @@ const authenticateJwt = (req, res, next) => {
 };
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://irfanfaraaz:xZ5bVz84n92t8Pgp@cluster0.ohrpfga.mongodb.net/', { useNewUrlParser: true, useUnifiedTopology: true, dbName: "courses" });
+mongoose.connect('mongodb+srv://irfanfaraaz:', { useNewUrlParser: true, useUnifiedTopology: true, dbName: "courses" });
 
 app.get('/admin/me', authenticateJwt, (req, res) => {
   res.json({username: req.user.username});
