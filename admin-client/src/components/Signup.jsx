@@ -3,10 +3,16 @@ import TextField from "@mui/material/TextField";
 import {Card, Typography} from "@mui/material";
 import {useState} from "react";
 import axios from "axios";
+import { BASE_URL } from "../config.js";
+import {useNavigate} from "react-router-dom";
+import {useSetRecoilState} from "recoil";
+import {userState} from "../store/atoms/user.js";
 
 function Signup() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate()
+    const setUser = useSetRecoilState(userState);
 
     return <div>
             <div style={{
@@ -22,9 +28,8 @@ function Signup() {
         <div style={{display: "flex", justifyContent: "center"}}>
             <Card varint={"outlined"} style={{width: 400, padding: 20}}>
                 <TextField
-                    onChange={(evant11) => {
-                        let elemt = evant11.target;
-                        setEmail(elemt.value);
+                    onChange={(event) => {
+                        setEmail(event.target.value);
                     }}
                     fullWidth={true}
                     label="Email"
@@ -45,36 +50,16 @@ function Signup() {
                 <Button
                     size={"large"}
                     variant="contained"
-                    onClick={() => {
-                        // function callback2(data) {
-                        //     localStorage.setItem("token", data.token);
-                        //     window.location = "/"
-
-                        // }
-                        // function callback1(res) {
-                        //     res.json().then(callback2)
-                        // }
-                        // fetch("http://localhost:3000/admin/signup", {
-                        //     method: "POST",
-                        //     body: JSON.stringify({
-                        //         username: email,
-                        //         password: password
-                        //     }),
-                        //     headers: {
-                        //         "Content-type": "application/json"
-                        //     }
-                        // })
-                        // .then(callback1)
-
-                        function callback1(response) {
-                            let data = response.data;
-                            localStorage.setItem("token", data.token);
-                            window.location = "/"
-                        }
-                        axios.post("http://localhost:3000/admin/signup", {
+                    onClick={async() => {
+                        const response = await axios.post(`${BASE_URL}/admin/signup`, {
                             username: email,
                             password: password
-                        }).then(callback1)
+                        })
+                        let data = response.data;
+                        localStorage.setItem("token", data.token);
+                        // window.location = "/"
+                        setUser({userEmail: email, isLoading: false})
+                        navigate("/courses")
                     }}
 
                 > Signup</Button>
