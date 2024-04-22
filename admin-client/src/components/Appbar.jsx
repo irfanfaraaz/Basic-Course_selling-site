@@ -105,6 +105,11 @@ function Appbar() {
                         onClick={() => {
                             navigate("/signup")
                         }}
+                        onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                navigate("/signup")
+              }
+            }}
                     >Signup</Button>
                 </div>
                 <div>
@@ -113,6 +118,11 @@ function Appbar() {
                         onClick={() => {
                             navigate("/signin")
                         }}
+                        onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                navigate("/signin")
+              }
+            }}
                     >Signin</Button>
                 </div>
             </div>
