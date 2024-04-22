@@ -25,7 +25,13 @@ function Appbar() {
         }}>
             <div style={{marginLeft: 10, cursor: "pointer"}} onClick={() => {
                 navigate("/")
-            }}>
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                navigate("/")
+              }
+            }}
+                >
                 <Typography variant={"h6"}>Vdemy</Typography>
             </div>
     
@@ -36,6 +42,11 @@ function Appbar() {
                             onClick={() => {
                                 navigate("/addcourse")
                             }}
+                            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                navigate("/addcourse")
+              }
+            }}
                         >Add course</Button>
                     </div>
 
@@ -44,6 +55,11 @@ function Appbar() {
                             onClick={() => {
                                 navigate("/courses")
                             }}
+                            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                navigate("/courses")
+              }
+            }}
                         >Courses</Button>
                     </div>
 
@@ -56,6 +72,15 @@ function Appbar() {
                                 userEmail: null
                             })
                         }}
+                        onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                localStorage.setItem("token", null);
+                            setUser({
+                                isLoading: false,
+                                userEmail: null
+                            })
+              }
+            }}
                     >Logout</Button>
                 </div>
             </div>
