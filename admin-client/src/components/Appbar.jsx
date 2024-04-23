@@ -94,7 +94,9 @@ function Appbar() {
         }}>
             <div style={{marginLeft: 10, cursor: "pointer"}} onClick={() => {
                 navigate("/")
-            }}>
+            }}
+                onKeyDown={(e) => {if(e.key === 'Enter') navigate("/")}}
+                >
                 <Typography variant={"h6"}>Vdemy</Typography>
             </div>
     
